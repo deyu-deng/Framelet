@@ -72,16 +72,16 @@ def classify(path, tiers):
     return (hits[0] if hits else None), hits
 
 
-def tracked():
-    out = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT,
+def tracked(repo):
+    out = subprocess.run(["git", "ls-files", "-z"], cwd=repo,
                          capture_output=True, text=True)
     return [p for p in out.stdout.split("\0") if p]
 
 
-def ever_added():
+def ever_added(repo):
     out = subprocess.run(["git", "log", "--all", "--diff-filter=A",
                           "--name-only", "--pretty=format:"],
-                         cwd=ROOT, capture_output=True, text=True)
+                         cwd=repo, capture_output=True, text=True)
     return {p for p in out.stdout.splitlines() if p.strip()}
 
 
@@ -110,10 +110,18 @@ def env_pairs():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--list", action="store_true", help="只打归档表")
+    ap.add_argument("--repo", default=ROOT,
+                    help="扫哪个仓库。默认本仓库；内容仓库用 --repo ~/Studio")
     args = ap.parse_args()
 
-    tiers = json.load(open(MANIFEST, encoding="utf-8"))
-    files = tracked()
+    # 扫别的仓库时，文件清单与档位规则跟着走，但 .env 仍然读工具自己那份 ——
+    # 凭证只在工具仓库里，内容仓库本来就不该有 .env。
+    repo = os.path.abspath(os.path.expanduser(args.repo))
+    manifest = os.path.join(repo, "publish_manifest.json")
+    if not os.path.isfile(manifest):
+        manifest = MANIFEST
+    tiers = json.load(open(manifest, encoding="utf-8"))
+    files = tracked(repo)
     rows = [(f, classify(f, tiers)) for f in files]
     rules = sum(len(tiers[t]) for t in ORDER)
 
@@ -137,7 +145,7 @@ def main():
           % (len(files), rules))
 
     # 工作树已删、索引里还在：判档没意义（内容马上消失），单独报一行别混进红项
-    missing = [f for f in files if not os.path.isfile(os.path.join(ROOT, f))]
+    missing = [f for f in files if not os.path.isfile(os.path.join(repo, f))]
     present = [f for f in files if f not in missing]
     if missing:
         note("待移除", "%d 个文件工作树里已删但索引还在：%s（提交后自动消失，不判档）"
@@ -162,8 +170,12 @@ def main():
     else:
         ok("不出门", "没有 never 档文件被跟踪")
 
-    # 遮蔽：一个文件同时命中多档 —— 优先级能定序，但规则写重了要让人看见
-    shadowed = [(f, h) for f, (_, h) in rows if len(h) > 1 and f in present]
+    # 遮蔽：一个文件同时命中多档 —— 优先级能定序，但规则写重了要让人看见。
+    # 兜底档（"public": ["**"] 或 "private": ["**"]）不算写重，跳过，否则整仓都报重叠。
+    def catch_all(hits):
+        return len(hits) > 1 and any(set(tiers[t]) == {"**"} for t in hits)
+    shadowed = [(f, h) for f, (_, h) in rows
+                if len(h) > 1 and f in present and not catch_all(h)]
     if shadowed:
         note("档位重叠", "%d 个文件被多档命中，按 never>private>public 取前者，例：%s"
              % (len(shadowed), "、".join("%s(%s)" % (f, ">".join(h))
@@ -175,7 +187,7 @@ def main():
         note("密钥", "本机没有 .env，跳过值检索（不代表历史干净）")
     else:
         leaked = []
-        blobs = {f: open(os.path.join(ROOT, f), "rb").read() for f in present}
+        blobs = {f: open(os.path.join(repo, f), "rb").read() for f in present}
         for k, v in pairs:
             needle = v.encode("utf-8")
             for f, data in blobs.items():
@@ -188,7 +200,7 @@ def main():
                % (len(pairs), len(present)))
 
     # 4 历史
-    hist = ever_added()
+    hist = ever_added(repo)
     gone = sorted(p for p in hist if classify(p, tiers)[0] == "never")
     if gone:
         bad("历史", "%d 个 never 档路径进过 git 历史（现在删了也还在对象库里）：%s"

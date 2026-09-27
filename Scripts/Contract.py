@@ -23,7 +23,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-EPISODES = os.path.join(ROOT, "Episodes")
+EPISODES_LOCAL = os.path.join(ROOT, "Episodes")
 MIN_CAPTION_SEC = 0.9        # 短于此的字幕读不完
 BEAT_SEAM = 0.02             # 拍与拍之间允许的缝隙（秒），再大就是 BuildScript 漏了空隙
 
@@ -88,26 +88,45 @@ def _fail(msg, hint=""):
     sys.exit(1)
 
 
-def _episode_dir():
-    """哪一集在制：--episode 显式给 > 环境变量 > Episodes/ 下唯一一份 episode.json。
+def _episode_roots():
+    """内容住在哪：环境变量 STUDIO_ROOT 指过来的目录 + 工具自带的 Episodes/。
 
-    默认值刻意不做成常量：EP002 的目录一建出来，"当前这一集"就该自动跟着变，
-    而两集并存时逼他说清楚要渲哪一集 —— 猜错会渲出错片子。
+    分开是因为工具是公开的、内容不是 —— 一期片子的稿子和配音不该出现在 GitHub 上，
+    而渲染又必须同时读到两边。所以这里只认"根目录"，不复制任何文件。
     """
-    if "--episode" in sys.argv:
-        want = sys.argv[sys.argv.index("--episode") + 1]
-        d = os.path.join(EPISODES, want)
-        if not os.path.isfile(os.path.join(d, "episode.json")):
-            _fail(f"--episode {want} 下没有 episode.json", f"看 {d}/")
-        return d
-    env = os.environ.get("PLOBI_EPISODE")
+    roots = []
+    env = os.environ.get("STUDIO_ROOT")
     if env:
-        return os.path.join(EPISODES, env)
-    found = [os.path.dirname(p) for p in glob.glob(os.path.join(EPISODES, "*", "episode.json"))]
+        roots.append(os.path.expanduser(env))
+    roots.append(EPISODES_LOCAL)
+    return [r for r in roots if os.path.isdir(r)]
+
+
+def _episode_dir():
+    """哪一集在制：--episode 显式给 > 环境变量 PLOBI_EPISODE > 唯一一份 episode.json。
+
+    名字可以带一层账号目录（`plobi/EP001_SelfIntro`），因为内容仓库是按账号分树的。
+    默认值刻意不做成常量：新一集一建出来，"当前在制"就该自动跟着变；
+    而多集并存时逼他说清楚要渲哪一集 —— 猜错会渲出一部错的片子。
+    """
+    # 只认环境变量，不加命令行参数：渲染器和八道门禁各有各的参数表，
+    # 给 --episode 挨个开口子会漏，而"在制哪一集"本来就是工作环境的事，不是某次命令的事。
+    want = os.environ.get("PLOBI_EPISODE")
+    if want:
+        for r in _episode_roots():
+            d = os.path.join(r, want)
+            if os.path.isfile(os.path.join(d, "episode.json")):
+                return d
+        _fail(f"找不到 episode {want}",
+              "在 %s 里找过 %s/episode.json" % ("、".join(_episode_roots()), want))
+    found = []
+    for r in _episode_roots():
+        found += [os.path.dirname(p) for p in glob.glob(os.path.join(r, "*", "episode.json"))]
+        found += [os.path.dirname(p) for p in glob.glob(os.path.join(r, "*", "*", "episode.json"))]
     if len(found) == 1:
         return found[0]
     _fail("在制的是哪一集说不确定（%d 个候选）" % len(found),
-          "加 --episode <目录>，或设环境变量 PLOBI_EPISODE")
+          "设 PLOBI_EPISODE=<目录>（可带一层账号名）；\n  候选：" + "\n  ".join(found))
 
 
 PROFILE_DIR = _episode_dir()

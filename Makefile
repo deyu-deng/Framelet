@@ -1,6 +1,9 @@
 # 一条命令跑完该跑的检查。以前这些门禁只能手动一个个跑，没人记得全跑过没有。
 PY ?= .venv/bin/python
 
+# 仓库自检永远跑自带的 Demo，不跟着 STUDIO_ROOT 跑到别人的片子上去
+export PLOBI_EPISODE := Demo
+
 check:  ## 仓库健康：资产 + 动作质量 + 出门前扫描
 	$(PY) Scripts/CheckAsset.py
 	$(PY) Scripts/CheckMotion.py
