@@ -1,0 +1,99 @@
+{
+  "_comment": [
+    "Plobi 部件契约 —— Docs/VibeMotionPlan.md §7 数据契约的落地件，也是 §18 阶段 0 第 1、2 项的产物。",
+    "改这个文件即可换角色造型，不需要动 Python。验收点：换一个保持部件 id 的 SVG，成片角色随之改变。",
+    "支点一律写在**资产原生坐标**（viewBox 空间）里，由 Rig.py 经 wrap 映射到渲染器本地画布 ——",
+    "对应 §9 第 4 条'变换原点声明化'，不要把这些数字硬编码回代码。"
+  ],
+
+  "svg": "2D/Plobi.svg",
+  "viewBox": [0, 0, 500, 600],
+
+  "wrap": { "translate": [62.5, 35], "scale": 0.55 },
+  "canvas": 400,
+
+  "parts": {
+    "shell": {
+      "id": "rigidShell",
+      "pivot": [250, 350],
+      "rigid": true,
+      "lag": 0.08,
+      "channels": ["shellX", "shellY", "shellRot"],
+      "scale": 1.20,
+      "_scale_why": "2026-09-22 创作者裁决：壳要读得出来。实测壳/身宽比 0.57 时只剩左边一弯月牙，1.30 到 0.85；创作者看片后说「稍微大了一点」，回调到 1.20。只做部件缩放、没动资产几何，退回 1.0 即复原。"
+    },
+    "legL": {
+      "id": "legLGroup",
+      "pivot": [180, 500],
+      "lag": 0.24,
+      "channels": ["legLeftRot", "legLeftSquash"]
+    },
+    "legR": {
+      "id": "legRGroup",
+      "pivot": [320, 500],
+      "lag": 0.24,
+      "channels": ["legRightRot", "legRightSquash"]
+    },
+    "body": {
+      "id": "fluidBody",
+      "pivot": [250, 367],
+      "lag": 0.0,
+      "channels": ["bodyScaleX", "bodyScaleY", "bodyRot"]
+    },
+    "armL": {
+      "id": "armLGroup",
+      "pivot": [180, 320],
+      "lag": 0.20,
+      "channels": ["armLeftRot"]
+    },
+    "armR": {
+      "id": "armRGroup",
+      "pivot": [320, 320],
+      "lag": 0.20,
+      "channels": ["armRightRot"]
+    },
+    "eyeL": {
+      "id": "eyeLGroup",
+      "pivot": [203, 227],
+      "channels": ["eyeSquash"]
+    },
+    "eyeR": {
+      "id": "eyeRGroup",
+      "pivot": [294, 227],
+      "channels": ["eyeSquash"]
+    },
+    "head": {
+      "id": "headGroup",
+      "pivot": [250, 258],
+      "lag": 0.14,
+      "channels": ["headRot", "headY"]
+    }
+  },
+
+  "root": { "pivot": [250, 300], "channels": ["rootX", "rootY", "rootRot"] },
+
+  "anchors": {
+    "_why": "道具挂在身上的哪一点。数值不是目测的：把部件单独光栅化、取 alpha>20 的墨迹像素里离支点最远那一个（脚本 .workbuddy/scratch/measure_hand.py）。手是一个无指突起，所以「最远点」就是掌面外侧——这正是他要的默认手型。",
+    "armR": { "hand": [418.0, 324.5] },
+    "armL": { "hand": [70.5, 325.0] }
+  },
+
+  "z_order": ["shell", "armL", "armR", "legL", "legR", "body", "head", "eyeL", "eyeR"],
+
+  "mouth": {
+    "group": "mouthGroup",
+    "states": {
+      "happy": "mouth_happy",
+      "shock": "mouth_shock",
+      "smug": "mouth_smug",
+      "talk": "mouth_talk"
+    },
+    "sync": { "id": "mouthSyncEllipse", "attr": "ry", "channel": "mouthAperture", "min": 1.5 },
+    "_comment": "资产里用 CSS .mouth-state{display:none} 切换，但 PyMuPDF 完全不认 display/visibility（实测六种写法全部照画）。所以可见性由 Rig.py 自己做字符串选择，一次只保留一个状态组；talk 态的 ry 由 sync 声明逐帧改写。"
+  },
+
+  "drop_ids": ["groundShadow"],
+  "_drop_reason": "该元素的 fill 依赖 radialGradient，而 PyMuPDF 不解析 url(#id)、会把它塌成实心黑饼（§26 判决实验）。**这是后端的缺陷，不是资产的错误** —— 所以选择丢弃而不是把资产改成平涂。成片的接触阴影由 RenderVideo.py 自绘，且跟随 bodyScaleX 胀缩，比资产里这颗固定椭圆更贴'柔性身体压在地上'。若将来换成支持渐变的后端，把本项清空即可拿回软阴影。",
+
+  "inert_features_warn": ["clip-path", "filter", "linearGradient", "radialGradient", "stroke-dasharray", "display", "visibility"]
+}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="100%" height="100%">
+  <!--
+    漫画稿 —— 爱好墙第二件，也是这面墙里唯一带情绪的一件。
+    他说"小时候很喜欢画漫画，但是学业磨平了我对绘画的热爱"。
+    所以这张纸要能**从钉着的左上角垂下去**：垂落由渲染器施加旋转，
+    这里只画"还挂着"的样子，右上角故意翘起一点，垂下去才看得出它原来是被风掀着的。
+  -->
+  <g id="page">
+    <path d="M 22,18 L 236,10 L 276,44 L 282,224 L 30,236 Z" fill="#FDEDD2" stroke="#241812" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M 236,10 L 276,44 L 232,52 Z" fill="#F5E3C6" stroke="#241812" stroke-width="7" stroke-linejoin="round"/>
+    <g id="panels">
+      <path d="M 46,52 L 148,48 L 150,128 L 48,132 Z" fill="none" stroke="#241812" stroke-width="5"/>
+      <path d="M 164,50 L 262,46 L 264,124 L 166,128 Z" fill="none" stroke="#241812" stroke-width="5"/>
+      <path d="M 48,148 L 262,142 L 264,214 L 50,220 Z" fill="none" stroke="#241812" stroke-width="5"/>
+    </g>
+    <g id="stickFigure">
+      <circle cx="96" cy="78" r="15" fill="none" stroke="#241812" stroke-width="6"/>
+      <path d="M 96,93 L 96,118 M 96,102 L 76,114 M 96,102 L 118,110 M 96,118 L 82,130 M 96,118 L 112,130"
+            fill="none" stroke="#241812" stroke-width="6" stroke-linecap="round"/>
+      <path d="M 188,66 q 16,-12 30,2 q 10,12 -4,20 l -18,10 l 6,-18 q -12,-4 -14,-14 Z"
+            fill="#FAABA1" stroke="#241812" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M 74,168 q 22,-14 44,0 M 132,164 l 14,10 M 158,160 q 20,-10 40,2"
+            fill="none" stroke="#241812" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <circle cx="26" cy="18" r="7" fill="#CD6B43" stroke="#241812" stroke-width="4"/>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+# 渲染产物：都能由脚本重新生成，不进版本库
+Episodes/*/Render/
+Episodes/*/Audio/
+*.mp4
+*.wav
+*.mp3
+*.m4a
+
+# 研究与参考素材（常含第三方来源，别出门）
+Ref/
+*.blend1
+
+# 环境与缓存
+.env
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store

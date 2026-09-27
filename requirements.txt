@@ -1,0 +1,6 @@
+# 渲染管线。Python 3.13（3.11+ 应该都行，只用到 numpy/PyMuPDF/Pillow/scipy 的稳定 API）
+# 另外需要系统里的 ffmpeg：macOS `brew install ffmpeg`
+numpy>=2.0
+scipy>=1.11
+PyMuPDF>=1.24        # import 名是 fitz
+Pillow>=10.0

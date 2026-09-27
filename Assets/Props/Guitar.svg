@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 430" width="100%" height="100%">
+  <!--
+    吉他 —— 爱好墙第一件。他说"我喜欢音乐，会很多乐器，比如吉他，钢琴和口琴"。
+    靠墙立着，琴头略歪：这是他自己说"水平不高"的道具，画太精致就假了。
+    色卡与描边沿用 Plobi / Aura 那套；不用剪裁、滤镜、渐变、虚线（渲染器实测不生效）。
+  -->
+  <g id="guitarNeck">
+    <path d="M 150,150 L 214,34 L 236,46 L 174,162 Z" fill="#AC512C" stroke="#241812" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M 208,22 L 246,44 L 234,68 L 196,46 Z" fill="#CD6B43" stroke="#241812" stroke-width="8" stroke-linejoin="round"/>
+    <circle cx="216" cy="30" r="6" fill="#FDEDD2" stroke="#241812" stroke-width="4"/>
+    <circle cx="232" cy="40" r="6" fill="#FDEDD2" stroke="#241812" stroke-width="4"/>
+    <circle cx="222" cy="54" r="6" fill="#FDEDD2" stroke="#241812" stroke-width="4"/>
+  </g>
+  <g id="guitarBody">
+    <path d="M 150,152 C 196,168 208,214 186,246 C 214,272 210,330 168,356
+             C 122,384 62,370 40,326 C 20,286 34,244 62,226
+             C 40,196 52,158 92,146 C 114,140 134,142 150,152 Z"
+          fill="#CD6B43" stroke="#241812" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M 150,152 C 196,168 208,214 186,246 C 200,262 202,290 194,312
+             C 176,268 148,224 116,196 C 100,182 118,158 150,152 Z"
+          fill="#E8814F" opacity="0.55"/>
+    <circle cx="112" cy="278" r="34" fill="#241812" opacity="0.86"/>
+    <path d="M 78,318 L 148,332 L 144,348 L 74,334 Z" fill="#AC512C" stroke="#241812" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M 120,168 C 108,206 100,246 98,286" fill="none" stroke="#FDEDD2" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 136,172 C 126,210 118,250 116,288" fill="none" stroke="#FDEDD2" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>

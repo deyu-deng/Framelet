@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 360" width="100%" height="100%">
+  <!-- ========================================================================= -->
+  <!-- Plobi 道具 · 篮筐（EP001 暴扣威亚梗）                                       -->
+  <!-- 画风：蜡笔手绘 —— 粗圆描边 #241812 / 平涂 / 无渐变无剪裁无虚线               -->
+  <!-- PyMuPDF 会静默丢弃 clip-path · filter · 渐变 · 虚线，                        -->
+  <!-- 所以钢丝与篮网全部画成实打实的几何路径；阴影画成自带边界的形状，不靠剪裁。   -->
+  <!-- ========================================================================= -->
+
+  <!-- 1. 吊装五毛特效威亚钢丝（实线，不再是虚线） -->
+  <g id="hangerRig">
+    <path d="M 120,0 L 120,44" fill="none" stroke="#FDEDD2" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 280,0 L 280,44" fill="none" stroke="#FDEDD2" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="120" cy="44" r="7" fill="#AC512C"/>
+    <circle cx="280" cy="44" r="7" fill="#AC512C"/>
+  </g>
+
+  <!-- 2. 篮板：陶土木板，粗描边，右侧暗面是画进板内的形状 -->
+  <g id="backboard">
+    <rect x="40" y="40" width="320" height="190" rx="20" fill="#CD6B43" stroke="#241812" stroke-width="9" stroke-linejoin="round"/>
+    <!-- 暗面与篮板共用圆角圆心 (340,60)/(340,210)，半径 14 < 20，天然落在板内 -->
+    <path d="M 300,46 L 340,46 A 14,14 0 0 1 354,60 L 354,210 A 14,14 0 0 1 340,224 L 292,224 Z" fill="#AC512C"/>
+    <!-- 瞄准框：奶油色压在陶土上最跳，上移让位给底下的篮圈基座 -->
+    <rect x="140" y="88" width="120" height="82" rx="10" fill="none" stroke="#FDEDD2" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 3. 篮圈加固基座：压在瞄准框下方，露出一截安装板 + 两颗螺栓 -->
+  <g id="rimMount">
+    <rect x="174" y="166" width="52" height="48" rx="11" fill="#AC512C" stroke="#241812" stroke-width="8" stroke-linejoin="round"/>
+    <circle cx="187" cy="180" r="4.5" fill="#FDEDD2"/>
+    <circle cx="213" cy="180" r="4.5" fill="#FDEDD2"/>
+  </g>
+
+  <!-- 4. 篮网：显式交叉网格（8 根经线两两成 X + 2 道加固圈），不是虚线也不是滤镜 -->
+  <g id="net">
+    <path d="M 152,228 L 176,318  M 248,228 L 224,318
+             M 152,228 L 192,318  M 184,235 L 176,318
+             M 184,235 L 208,318  M 216,235 L 192,318
+             M 216,235 L 224,318  M 248,228 L 208,318"
+          fill="none" stroke="#FDEDD2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 160,260 Q 200,270 240,260" fill="none" stroke="#FFF8EA" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 169,292 Q 200,301 231,292" fill="none" stroke="#FFF8EA" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- 5. 篮圈：粗描边外圈 + 细一号内芯叠出「两侧都有蜡笔边」，中间留得住开口 -->
+  <g id="rim">
+    <ellipse cx="200" cy="220" rx="56" ry="17" fill="none" stroke="#241812" stroke-width="16"/>
+    <ellipse cx="200" cy="220" rx="56" ry="17" fill="none" stroke="#CD6B43" stroke-width="8"/>
+  </g>
+
+  <!-- 6. 篮球已拆成 Assets/Props/Basketball.svg：
+       它要跟着手飞、扣完还要自己弹走，长在篮板上就动不了 --></svg>

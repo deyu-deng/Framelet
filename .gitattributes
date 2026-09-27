@@ -1,0 +1,22 @@
+# 仓库以 LF 为准：Windows 与 macOS 两边 checkout 都不再改换行符。
+# 不设这一条，两边来回一次就会把每个文件都变成"modified"（实际只换了 CRLF）。
+* text=auto eol=lf
+
+# 光栅与音频：换行符转换会直接损坏这些文件
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.mp3 binary
+*.wav binary
+*.m4a binary
+*.mp4 binary
+*.mov binary
+*.ttf binary
+*.otf binary
+*.pyc binary
+*.zip binary
+
+# SVG 是文本资产，按文本处理（渲染器与 CheckAsset 都要按行读它）
+*.svg text eol=lf

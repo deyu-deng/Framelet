@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 430" width="100%" height="100%">
+  <!--
+    手机 —— 他从壳里掏出来展示气韵的那台。画得比人小一点但足够大，
+    因为屏幕里要放真实的应用截图（截图由渲染器内嵌，不在这个文件里）。
+    屏幕矩形 id=phoneScreen 的坐标被渲染器读去定位截图，改这里要同步改 PROP_PHONE_SCREEN。
+  -->
+  <g id="phoneBody">
+    <path d="M 34,22 C 30,10 44,6 110,5 C 176,6 190,10 186,22
+             C 192,60 194,120 194,215 C 194,310 192,370 186,408
+             C 190,420 176,424 110,425 C 44,424 30,420 34,408
+             C 28,370 26,310 26,215 C 26,120 28,60 34,22 Z"
+          fill="#241812" stroke="#241812" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M 42,32 C 40,22 54,18 110,17 C 166,18 180,22 178,32
+             C 184,68 185,124 185,215 C 185,306 184,362 178,398
+             C 180,408 166,412 110,413 C 54,412 40,408 42,398
+             C 36,362 35,306 35,215 C 35,124 36,68 42,32 Z"
+          fill="#FDEDD2" stroke="#241812" stroke-width="5" stroke-linejoin="round"/>
+  </g>
+  <rect id="phoneScreen" x="48" y="44" width="124" height="342" rx="16" fill="#1B1410"/>
+  <g id="phoneDetails">
+    <path d="M 88,28 L 132,27" fill="none" stroke="#241812" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 190,120 L 198,122 L 198,168 L 190,166 Z" fill="#CD6B43" stroke="#241812" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 108,400 q 6,8 12,0" fill="none" stroke="#AC512C" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

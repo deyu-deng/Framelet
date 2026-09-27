@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 160" width="100%" height="100%">
+  <!-- ========================================================================= -->
+  <!-- Plobi 道具 · 三连徽章（点赞 / 投币 / 收藏，结尾「欢迎三连」梗）              -->
+  <!-- 画风：蜡笔手绘 —— 粗圆描边 #241812 / 平涂 / 无渐变无剪裁无滤镜无虚线         -->
+  <!-- 原来那套高饱和蓝金红 + 白色浮雕底托已整体换成限定色卡：                       -->
+  <!-- 陶土 / 奶油 / 腮红三枚圆盘，图标用奶油与深陶土，小尺寸下靠描边而不是靠颜色区分。-->
+  <!-- ========================================================================= -->
+
+  <!-- 1. 点赞徽章 -->
+  <g id="badgeLike" transform="translate(75, 80)">
+    <circle cx="0" cy="0" r="46" fill="#CD6B43" stroke="#241812" stroke-width="9"/>
+    <path d="M -33.8,-12.3 Q -28,-28 -12.3,-33.8" fill="none" stroke="#FFF8EA" stroke-width="7" stroke-linecap="round"/>
+    <g transform="translate(2, 0)">
+      <rect x="-26" y="1" width="15" height="24" rx="5" fill="#FDEDD2" stroke="#241812" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M -11,1 C -11,-7 -7,-18 -1,-22 C 5,-25 13,-21 13,-14 C 13,-9 11,-5 9,-1 L 15,-1
+               C 21,-1 23,3 21,8 L 16,20 C 15,23 12,25 8,25 L -11,25 Z"
+            fill="#FDEDD2" stroke="#241812" stroke-width="6" stroke-linejoin="round"/>
+      <!-- 指节折线：没有这两道，拇指+拳头会读成一只手套；起笔避开拇指根，免得读成笑脸 -->
+      <path d="M 9,7 L 20,8 M 9,16 L 18,16" fill="none" stroke="#241812" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- 2. 投币徽章：币面雕一台小电视 -->
+  <g id="badgeCoin" transform="translate(225, 80)">
+    <circle cx="0" cy="0" r="46" fill="#FDEDD2" stroke="#241812" stroke-width="9"/>
+    <path d="M -33.8,-12.3 Q -28,-28 -12.3,-33.8" fill="none" stroke="#FFF8EA" stroke-width="7" stroke-linecap="round"/>
+    <g transform="translate(0, 3) scale(1.06)">
+      <path d="M -6,-10 L -15,-24" fill="none" stroke="#AC512C" stroke-width="6" stroke-linecap="round"/>
+      <path d="M 6,-10 L 15,-24" fill="none" stroke="#AC512C" stroke-width="6" stroke-linecap="round"/>
+      <rect x="-20" y="-10" width="40" height="32" rx="10" fill="#AC512C" stroke="#241812" stroke-width="6" stroke-linejoin="round"/>
+      <rect x="-13" y="-4" width="26" height="20" rx="6" fill="#FDEDD2"/>
+      <circle cx="-6" cy="6" r="3" fill="#AC512C"/>
+      <circle cx="6" cy="6" r="3" fill="#AC512C"/>
+    </g>
+  </g>
+
+  <!-- 3. 收藏徽章 -->
+  <g id="badgeFav" transform="translate(375, 80)">
+    <circle cx="0" cy="0" r="46" fill="#FAABA1" stroke="#241812" stroke-width="9"/>
+    <path d="M -33.8,-12.3 Q -28,-28 -12.3,-33.8" fill="none" stroke="#FFF8EA" stroke-width="7" stroke-linecap="round"/>
+    <polygon points="0,-24 7.1,-7.7 24.7,-6 11.4,5.7 15.3,23 0,14 -15.3,23 -11.4,5.7 -24.7,-6 -7.1,-7.7"
+             fill="#FDEDD2" stroke="#241812" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+</svg>

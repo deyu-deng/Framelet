@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 340" width="100%" height="100%">
+  <!-- ========================================================================= -->
+  <!-- Plobi 道具 · 复古 CRT 电视（转场 / 取景装置，EP001「牛来」梗）              -->
+  <!-- 画风：蜡笔手绘 —— 粗圆描边 #241812 / 平涂 / 无渐变无剪裁无滤镜              -->
+  <!-- 原来的地面接触阴影是 radialGradient，PyMuPDF 不解析 url(#id) 会塌成实心黑饼，-->
+  <!-- 已整块删除（暗舞台背景下它本来也不可见）。机身暗面改成画进轮廓里的路径。      -->
+  <!-- ========================================================================= -->
+
+  <!-- 1. 顶部兔耳天线 -->
+  <g id="antenna">
+    <path d="M 188,40 L 132,14" fill="none" stroke="#AC512C" stroke-width="9" stroke-linecap="round"/>
+    <path d="M 212,40 L 268,14" fill="none" stroke="#AC512C" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="132" cy="14" r="9" fill="#CD6B43" stroke="#241812" stroke-width="6"/>
+    <circle cx="268" cy="14" r="9" fill="#CD6B43" stroke="#241812" stroke-width="6"/>
+    <rect x="175" y="32" width="50" height="16" rx="8" fill="#AC512C" stroke="#241812" stroke-width="7" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 2. 底部小木支脚（画在机身之后 → 被机身压住，不需要剪裁就藏得住） -->
+  <g id="legs">
+    <rect x="70" y="286" width="42" height="38" rx="12" fill="#AC512C" stroke="#241812" stroke-width="8" stroke-linejoin="round" transform="rotate(12, 91, 305)"/>
+    <rect x="288" y="286" width="42" height="38" rx="12" fill="#AC512C" stroke="#241812" stroke-width="8" stroke-linejoin="round" transform="rotate(-12, 309, 305)"/>
+  </g>
+
+  <!-- 3. 机身：奶油平涂 + 画进轮廓内的右侧暗面 -->
+  <g id="tvBody">
+    <rect x="25" y="45" width="350" height="260" rx="36" fill="#FDEDD2" stroke="#241812" stroke-width="10" stroke-linejoin="round"/>
+    <!-- 暗面与机身共用圆角圆心 (339,81)/(339,269)，半径 30 < 36，天然落在机身内 -->
+    <path d="M 300,51 L 339,51 A 30,30 0 0 1 369,81 L 369,269 A 30,30 0 0 1 339,299 L 292,299 Z" fill="#F5E3C6"/>
+  </g>
+
+  <!-- 4. CRT 屏幕外框：深陶土 -->
+  <g id="tvBezel">
+    <rect x="46" y="66" width="243" height="218" rx="30" fill="#AC512C" stroke="#241812" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 5. 荧光屏玻璃 + 复古终端字幕（原来的两条玻璃斜角高光靠 clipPath 裁，
+       渲染器不裁就会溢出，且平涂画风本就不要烘焙高光，已删） -->
+  <g id="crtScreen">
+    <rect x="58" y="78" width="219" height="194" rx="22" fill="#241812"/>
+    <text x="74" y="182" font-family="'Courier New', monospace" font-size="26" font-weight="900" fill="#4EEDA4" letter-spacing="3">&gt; NIU LAI!</text>
+  </g>
+
+  <!-- 6. 右侧控制面板：喇叭条 + 两个旋钮 + 电源灯 -->
+  <g id="controlPanel">
+    <rect x="302" y="80" width="58" height="9" rx="4.5" fill="#CD6B43" stroke="#241812" stroke-width="4" stroke-linejoin="round"/>
+    <rect x="302" y="97" width="58" height="9" rx="4.5" fill="#CD6B43" stroke="#241812" stroke-width="4" stroke-linejoin="round"/>
+    <rect x="302" y="114" width="58" height="9" rx="4.5" fill="#CD6B43" stroke="#241812" stroke-width="4" stroke-linejoin="round"/>
+
+    <circle cx="331" cy="162" r="25" fill="#CD6B43" stroke="#241812" stroke-width="8"/>
+    <circle cx="331" cy="162" r="16" fill="#AC512C"/>
+    <rect x="327" y="148" width="8" height="15" rx="4" fill="#FDEDD2"/>
+
+    <circle cx="331" cy="224" r="21" fill="#CD6B43" stroke="#241812" stroke-width="7"/>
+    <circle cx="331" cy="224" r="13" fill="#AC512C"/>
+    <rect x="327.5" y="213" width="7" height="13" rx="3.5" fill="#FDEDD2"/>
+
+    <circle cx="331" cy="272" r="8" fill="#FAABA1" stroke="#241812" stroke-width="5"/>
+  </g>
+</svg>

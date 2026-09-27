@@ -1,0 +1,12 @@
+{
+  "_comment": "本集档案：契约层读它。新增一集 = 抄这份改内容，不改代码。",
+  "id": "Demo",
+  "script": "Script.md",
+  "aspect": "16:9",
+  "actions": ["entrance", "talk", "outro"],
+  "mover_actions": ["entrance"],
+  "screens": [null],
+  "props": [],
+  "stills": {},
+  "credits": {}
+}

@@ -1,0 +1,20 @@
+{
+  "_comment": "公开仓库版清单：默认放行，黑名单优先。这里不需要'每个文件归哪档'—— 整个仓库就是公开的那一份。要守的是下面这几条绝不能出现的路径。CheckPublish.py 按 never > private > public 取先命中的档。",
+  "never": [
+    ".env",
+    "Ref/**",
+    "Assets/**/Ref/**",
+    "Assets/**/Concept/**",
+    "Assets/Branding/**",
+    "Episodes/*/Audio/**",
+    "Episodes/*/Picture/**",
+    "Episodes/*/Render/**",
+    "Episodes/EP0*/**",
+    "**/*.blend",
+    "**/my_voice_sample.*",
+    "**/seg*.wav",
+    "**/vo_*.mp3"
+  ],
+  "private": [],
+  "public": ["**"]
+}
